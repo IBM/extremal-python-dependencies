@@ -1,7 +1,6 @@
 # extremal-python-dependencies
 
-_A utility for installing extremal versions of dependencies for more robust test
-ing_
+_A utility for installing extremal versions of dependencies for more robust testing._
 
 Install extremal versions of package dependencies for more robust continuous integration testing, given a package that specifies its dependencies in a `pyproject.toml` file.
 
