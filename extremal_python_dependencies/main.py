@@ -9,6 +9,8 @@
 # copyright notice, and modified files need to carry a notice indicating
 # that they have been altered from the originals.
 
+"""Main code for extremal-python-dependencies."""
+
 import re
 import configparser
 from typing import List
@@ -108,7 +110,7 @@ def get_tox_minversion():
 
 
 def _pin_dependencies(mapfunc, inplace: bool):
-    with open("pyproject.toml") as f:
+    with open("pyproject.toml", encoding="utf-8") as f:
         d = toml.load(f)
     process_dependencies_in_place(d, mapfunc)
 
@@ -136,7 +138,7 @@ def pin_dependencies(replacements: List[str], inplace: bool = False):
 @app.command()
 def add_dependency(dependency: str, inplace: bool = False):
     """Add a dependency to `pyproject.toml`."""
-    with open("pyproject.toml") as f:
+    with open("pyproject.toml", encoding="utf-8") as f:
         d = toml.load(f)
     d["project"]["dependencies"].append(dependency)
     _save_pyproject_toml(d, inplace)
@@ -144,11 +146,12 @@ def add_dependency(dependency: str, inplace: bool = False):
 
 def _save_pyproject_toml(d: dict, inplace: bool) -> None:
     if inplace:
-        with open("pyproject.toml", "w") as f:
+        with open("pyproject.toml", "w", encoding="utf-8") as f:
             toml.dump(d, f)
     else:
         print(toml.dumps(d))
 
 
 def main():
+    """Main entry point."""
     return app()
