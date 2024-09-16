@@ -1,10 +1,17 @@
+[![Release](https://img.shields.io/pypi/v/extremal-python-dependencies.svg?label=Release)](https://github.com/IBM/extremal-python-dependencies/releases)
+[![Python](https://img.shields.io/pypi/pyversions/extremal-python-dependencies?label=Python&logo=python)](https://www.python.org/)
+[![License](https://img.shields.io/github/license/IBM/extremal-python-dependencies?label=License)](LICENSE.txt)
+[![Downloads](https://img.shields.io/pypi/dm/extremal-python-dependencies.svg?label=Downloads)](https://pypi.org/project/extremal-python-dependencies/)
+[![Tests](https://github.com/IBM/extremal-python-dependencies/actions/workflows/test_latest_versions.yml/badge.svg)](https://github.com/IBM/extremal-python-dependencies/actions/workflows/test_latest_versions.yml)
+[![Coverage](https://coveralls.io/repos/github/IBM/extremal-python-dependencies/badge.svg?branch=main)](https://coveralls.io/github/IBM/extremal-python-dependencies?branch=main)
+
 # extremal-python-dependencies
 
 _A utility for installing extremal versions of dependencies for more robust testing._
 
 Install extremal versions of package dependencies for more robust continuous integration testing, given a package that specifies its dependencies in a `pyproject.toml` file.
 
-For instance, one might use this utility to install the minimum supported version of each dependency before a CI run.  Ensuring all tests then pass ensures that the code is indeed compatible with the range of package versions it claims to be compatible with, helping to prevent users from encountering broken installs.
+For instance, one might use this utility to install the minimum supported version of each dependency before a CI run.  Ensuring all tests then pass adds confidence that the code is indeed compatible with the full range of package versions it claims to be compatible with, helping to prevent users from encountering broken installs.
 
 Another way to use this tool is to install development versions of certain packages.
 
