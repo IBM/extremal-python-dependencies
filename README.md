@@ -1,3 +1,10 @@
+[![Release](https://img.shields.io/pypi/v/extremal-python-dependencies.svg?label=Release)](https://github.com/IBM/extremal-python-dependencies/releases)
+[![Python](https://img.shields.io/pypi/pyversions/extremal-python-dependencies?label=Python&logo=python)](https://www.python.org/)
+[![License](https://img.shields.io/github/license/IBM/extremal-python-dependencies?label=License)](LICENSE.txt)
+[![Downloads](https://img.shields.io/pypi/dm/extremal-python-dependencies.svg?label=Downloads)](https://pypi.org/project/extremal-python-dependencies/)
+[![Tests](https://github.com/IBM/extremal-python-dependencies/actions/workflows/test_latest_versions.yml/badge.svg)](https://github.com/IBM/extremal-python-dependencies/actions/workflows/test_latest_versions.yml)
+[![Coverage](https://coveralls.io/repos/github/IBM/extremal-python-dependencies/badge.svg?branch=main)](https://coveralls.io/github/IBM/extremal-python-dependencies?branch=main)
+
 # extremal-python-dependencies
 
 _A utility for installing extremal versions of dependencies for more robust testing._
