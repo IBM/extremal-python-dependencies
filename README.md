@@ -4,7 +4,7 @@ _A utility for installing extremal versions of dependencies for more robust test
 
 Install extremal versions of package dependencies for more robust continuous integration testing, given a package that specifies its dependencies in a `pyproject.toml` file.
 
-For instance, one might use this utility to install the minimum supported version of each dependency before a CI run.  Ensuring all tests then pass ensures that the code is indeed compatible with the range of package versions it claims to be compatible with, helping to prevent users from encountering broken installs.
+For instance, one might use this utility to install the minimum supported version of each dependency before a CI run.  Ensuring all tests then pass adds confidence that the code is indeed compatible with the full range of package versions it claims to be compatible with, helping to prevent users from encountering broken installs.
 
 Another way to use this tool is to install development versions of certain packages.
 
