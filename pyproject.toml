@@ -55,7 +55,7 @@ only-include = [
 ]
 
 [tool.pylint.main]
-py-version = "3.7"
+py-version = "3.8"
 disable = [
     "missing-function-docstring",
 ]
