@@ -29,9 +29,35 @@ dependencies = [
     "typer==0.12.3",
 ]
 
+[project.optional-dependencies]
+dev = [
+    "extremal-python-dependencies[test,lint]",
+]
+test = [
+    "pytest>=8.0",
+]
+style = [
+    "ruff==0.6.4",
+    "typos>=1.20.0",
+]
+lint = [
+    "extremal-python-dependencies[style]",
+    "pydocstyle==6.3.0",
+    "mypy==1.11.2",
+    "pylint==3.2.7",
+    "reno>=4.1",
+    "types-toml~=0.10.8.20240310"
+]
+
 [tool.hatch.build.targets.wheel]
 only-include = [
     "extremal_python_dependencies",
+]
+
+[tool.pylint.main]
+py-version = "3.8"
+disable = [
+    "missing-function-docstring",
 ]
 
 [project.scripts]
