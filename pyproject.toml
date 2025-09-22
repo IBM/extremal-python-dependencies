@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "extremal-python-dependencies"
-version = "0.0.3"
+version = "0.1.0"
 description = "A utility for installing extremal versions of dependencies for more robust testing"
 readme = "README.md"
 license = {file = "LICENSE.txt"}
@@ -16,14 +16,13 @@ classifiers = [
     "Operating System :: MacOS",
     "Operating System :: POSIX :: Linux",
     "Operating System :: Microsoft :: Windows",
-    "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
 ]
 
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 
 dependencies = [
     "toml==0.10.2",
@@ -57,7 +56,7 @@ only-include = [
 ]
 
 [tool.pylint.main]
-py-version = "3.9"
+py-version = "3.10"
 disable = [
     "missing-function-docstring",
 ]
