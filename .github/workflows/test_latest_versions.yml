@@ -22,7 +22,7 @@ jobs:
       matrix:
         include:
           - os: ubuntu-22.04
-            python-version: "3.7"
+            python-version: "3.8"
           - os: ubuntu-latest
             python-version: "3.13"
           - os: macos-latest

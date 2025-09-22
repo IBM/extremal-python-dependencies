@@ -16,7 +16,6 @@ classifiers = [
     "Operating System :: MacOS",
     "Operating System :: POSIX :: Linux",
     "Operating System :: Microsoft :: Windows",
-    "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
@@ -25,7 +24,7 @@ classifiers = [
     "Programming Language :: Python :: 3.13",
 ]
 
-requires-python = ">=3.7"
+requires-python = ">=3.8"
 
 dependencies = [
     "toml==0.10.2",
@@ -59,7 +58,7 @@ only-include = [
 ]
 
 [tool.pylint.main]
-py-version = "3.7"
+py-version = "3.8"
 disable = [
     "missing-function-docstring",
 ]
