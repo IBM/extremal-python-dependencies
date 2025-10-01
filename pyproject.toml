@@ -38,7 +38,7 @@ test = [
     "pytest>=7.4.4",
 ]
 style = [
-    "ruff==0.12.11",
+    "ruff==0.13.2",
     "typos>=1.20.0",
 ]
 lint = [
