@@ -27,7 +27,7 @@ requires-python = ">=3.10"
 dependencies = [
     "toml==0.10.2",
     "typer==0.19.1",
-    "click==8.3.0",
+    "click==8.3.1",
 ]
 
 [project.optional-dependencies]
