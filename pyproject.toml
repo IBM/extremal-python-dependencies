@@ -44,7 +44,7 @@ style = [
 lint = [
     "extremal-python-dependencies[style]",
     "pydocstyle==6.3.0",
-    "mypy==1.19.0",
+    "mypy==1.19.1",
     "pylint==4.0.4",
     "reno>=4.1",
     "types-toml~=0.10.8.20240310"
