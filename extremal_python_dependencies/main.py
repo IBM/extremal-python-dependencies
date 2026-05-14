@@ -11,6 +11,7 @@
 
 import re
 import configparser
+import tomllib
 from typing import List
 
 import toml
@@ -108,8 +109,8 @@ def get_tox_minversion():
 
 
 def _pin_dependencies(mapfunc, inplace: bool):
-    with open("pyproject.toml", encoding="utf-8") as f:
-        d = toml.load(f)
+    with open("pyproject.toml", "rb") as f:
+        d = tomllib.load(f)
     process_dependencies_in_place(d, mapfunc)
 
     # Modify pyproject.toml so hatchling will allow direct references
@@ -136,8 +137,8 @@ def pin_dependencies(replacements: List[str], inplace: bool = False):
 @app.command()
 def add_dependency(dependency: str, inplace: bool = False):
     """Add a dependency to `pyproject.toml`."""
-    with open("pyproject.toml", encoding="utf-8") as f:
-        d = toml.load(f)
+    with open("pyproject.toml", "rb") as f:
+        d = tomllib.load(f)
     d["project"]["dependencies"].append(dependency)
     _save_pyproject_toml(d, inplace)
 
