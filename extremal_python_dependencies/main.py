@@ -34,6 +34,9 @@ def mapfunc_replace(replacements: List[str]):
         d[name] = r
 
     def _mapfunc_replace(dep):
+        if isinstance(dep, dict) and "include-group" in dep:
+            # It's a dependency group include.  Don't touch it.
+            return dep
         # Replace https://peps.python.org/pep-0508/#names with provided
         # version, often a https://peps.python.org/pep-0440/#direct-references
         match = _name_re.match(dep)
@@ -48,7 +51,7 @@ def mapfunc_replace(replacements: List[str]):
 def mapfunc_minimum(dep):
     """Set each dependency to its minimum version"""
     if isinstance(dep, dict) and "include-group" in dep:
-        # Don't touch dependency group include
+        # It's a dependency group include.  Don't touch it.
         return dep
     for clause in dep.split(","):
         if "*" in clause and "==" in clause:
