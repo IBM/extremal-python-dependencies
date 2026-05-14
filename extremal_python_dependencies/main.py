@@ -13,7 +13,7 @@ import re
 import configparser
 from typing import List
 
-import toml
+import tomlkit
 import typer
 
 
@@ -47,6 +47,9 @@ def mapfunc_replace(replacements: List[str]):
 
 def mapfunc_minimum(dep):
     """Set each dependency to its minimum version"""
+    if isinstance(dep, dict) and "include-group" in dep:
+        # Don't touch dependency group include
+        return dep
     for clause in dep.split(","):
         if "*" in clause and "==" in clause:
             raise ValueError(
@@ -84,6 +87,14 @@ def process_dependencies_in_place(d: dict, mapfunc):
             inplace_map(mapfunc, dependencies_list)
 
     try:
+        dep_groups = d["dependency-groups"]
+    except KeyError:
+        pass  # no dependency groups; that's fine.
+    else:
+        for dependencies_list in dep_groups.values():
+            inplace_map(mapfunc, dependencies_list)
+
+    try:
         build_system = d["build-system"]
     except KeyError:
         pass
@@ -109,7 +120,7 @@ def get_tox_minversion():
 
 def _pin_dependencies(mapfunc, inplace: bool):
     with open("pyproject.toml", encoding="utf-8") as f:
-        d = toml.load(f)
+        d = tomlkit.load(f)
     process_dependencies_in_place(d, mapfunc)
 
     # Modify pyproject.toml so hatchling will allow direct references
@@ -137,7 +148,7 @@ def pin_dependencies(replacements: List[str], inplace: bool = False):
 def add_dependency(dependency: str, inplace: bool = False):
     """Add a dependency to `pyproject.toml`."""
     with open("pyproject.toml", encoding="utf-8") as f:
-        d = toml.load(f)
+        d = tomlkit.load(f)
     d["project"]["dependencies"].append(dependency)
     _save_pyproject_toml(d, inplace)
 
@@ -145,9 +156,9 @@ def add_dependency(dependency: str, inplace: bool = False):
 def _save_pyproject_toml(d: dict, inplace: bool) -> None:
     if inplace:
         with open("pyproject.toml", "w", encoding="utf-8") as f:
-            toml.dump(d, f)
+            tomlkit.dump(d, f)
     else:
-        print(toml.dumps(d))
+        print(tomlkit.dumps(d))
 
 
 def main():
