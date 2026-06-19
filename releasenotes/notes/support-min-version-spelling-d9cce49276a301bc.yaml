@@ -1,0 +1,6 @@
+---
+features:
+  - |
+    The ``get-tox-minversion`` command now accepts both ``min_version`` (the
+    current preferred spelling) and ``minversion`` (the legacy spelling) in
+    ``tox.ini``, preferring ``min_version`` when present.
