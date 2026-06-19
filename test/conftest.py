@@ -9,7 +9,7 @@
 
 """Shared fixtures for the extremal-python-dependencies test suite."""
 
-import pytest
+import pytest  # pylint: disable=import-error
 from typer.testing import CliRunner
 
 
@@ -44,7 +44,7 @@ def sample_pyproject():
 
 
 @pytest.fixture
-def project_dir(tmp_path, monkeypatch, sample_pyproject):
+def project_dir(tmp_path, monkeypatch, sample_pyproject):  # pylint: disable=redefined-outer-name
     """Write sample_pyproject to tmp_path and chdir there."""
     (tmp_path / "pyproject.toml").write_text(sample_pyproject, encoding="utf-8")
     monkeypatch.chdir(tmp_path)

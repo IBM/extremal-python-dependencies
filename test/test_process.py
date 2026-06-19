@@ -22,6 +22,8 @@ def _parse(toml_text):
 
 
 class TestProcessDependenciesInPlace:
+    """Tests for process_dependencies_in_place."""
+
     def test_project_dependencies(self):
         d = _parse("[project]\ndependencies = ['foo>=1.0', 'bar~=2.0']\n")
         process_dependencies_in_place(d, mapfunc_minimum)

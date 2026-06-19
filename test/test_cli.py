@@ -10,14 +10,18 @@
 """Tests of the commandline interface."""
 
 import tomlkit
+from typer.testing import CliRunner
 
 from extremal_python_dependencies.main import app
-from typer.testing import CliRunner
 
 _runner = CliRunner()
 
 
 class TestPinDependenciesToMinimum:
+    """Tests for the pin-dependencies-to-minimum command."""
+
+    # pylint: disable=unused-argument  # project_dir used for chdir side effect
+
     def test_stdout_contains_pinned_versions(self, project_dir):
         result = _runner.invoke(app, ["pin-dependencies-to-minimum"])
         assert result.exit_code == 0
@@ -55,6 +59,10 @@ class TestPinDependenciesToMinimum:
 
 
 class TestPinDependencies:
+    """Tests for the pin-dependencies command."""
+
+    # pylint: disable=unused-argument  # project_dir used for chdir side effect
+
     def test_named_dep_replaced(self, project_dir):
         result = _runner.invoke(
             app,
@@ -94,6 +102,10 @@ class TestPinDependencies:
 
 
 class TestAddDependency:
+    """Tests for the add-dependency command."""
+
+    # pylint: disable=unused-argument  # project_dir used for chdir side effect
+
     def test_appends_to_stdout(self, project_dir):
         result = _runner.invoke(app, ["add-dependency", "newpkg==1.0"])
         assert result.exit_code == 0
@@ -108,6 +120,10 @@ class TestAddDependency:
 
 
 class TestGetToxMinversion:
+    """Tests for the get-tox-minversion command."""
+
+    # pylint: disable=unused-argument  # project_dir used for chdir side effect
+
     def test_prints_minversion(self, project_dir):
         (project_dir / "tox.ini").write_text(
             "[tox]\nminversion = 3.25\n", encoding="utf-8"
@@ -115,3 +131,8 @@ class TestGetToxMinversion:
         result = _runner.invoke(app, ["get-tox-minversion"])
         assert result.exit_code == 0
         assert result.stdout.strip() == "3.25"
+
+    def test_entrypoint(self, project_dir):
+        """Smoke test: the installed entry point responds to --help."""
+        result = _runner.invoke(app, ["--help"])
+        assert result.exit_code == 0

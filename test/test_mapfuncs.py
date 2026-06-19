@@ -19,6 +19,8 @@ from extremal_python_dependencies.main import (
 
 
 class TestMapfuncMinimum:
+    """Tests for mapfunc_minimum."""
+
     def test_ge_becomes_eq(self):
         assert mapfunc_minimum("foo>=1.2.3") == "foo==1.2.3"
 
@@ -42,6 +44,8 @@ class TestMapfuncMinimum:
 
 
 class TestMapfuncReplace:
+    """Tests for mapfunc_replace."""
+
     def test_single_replacement(self):
         f = mapfunc_replace(["foo@ git+https://example.com/foo.git"])
         assert f("foo>=1.0") == "foo@ git+https://example.com/foo.git"
@@ -75,6 +79,8 @@ class TestMapfuncReplace:
 
 
 class TestInplaceMap:
+    """Tests for inplace_map."""
+
     def test_mutates_list(self):
         lst = ["a", "b", "c"]
         inplace_map(str.upper, lst)
@@ -83,4 +89,4 @@ class TestInplaceMap:
     def test_empty_list(self):
         lst = []
         inplace_map(str.upper, lst)
-        assert lst == []
+        assert not lst
