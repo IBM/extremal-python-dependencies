@@ -55,11 +55,18 @@ only-include = [
     "extremal_python_dependencies",
 ]
 
+[tool.pytest.ini_options]
+testpaths = ["test"]
+
+[tool.coverage.report]
+fail_under = 100
+
 [tool.pylint.main]
 py-version = "3.10"
 disable = [
     "missing-function-docstring",
 ]
+ignored-modules = ["pytest"]
 
 [tool.ruff.lint.flake8-copyright]
 notice-rgx = """
