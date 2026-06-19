@@ -22,7 +22,7 @@ _name_re = re.compile(r"^([A-Z0-9][A-Z0-9._-]*[A-Z0-9])", re.IGNORECASE)
 
 
 def mapfunc_replace(replacements: List[str]):
-    """Use the provided version(s) of certain packages"""
+    """Use the provided version(s) of certain packages."""
     d: dict[str, str] = {}
     for r in replacements:
         match = _name_re.match(r)
@@ -49,7 +49,7 @@ def mapfunc_replace(replacements: List[str]):
 
 
 def mapfunc_minimum(dep):
-    """Set each dependency to its minimum version"""
+    """Set each dependency to its minimum version."""
     if isinstance(dep, dict) and "include-group" in dep:
         # It's a dependency group include.  Don't touch it.
         return dep
@@ -65,13 +65,13 @@ def mapfunc_minimum(dep):
 
 
 def inplace_map(fun, lst: list):
-    """In-place version of Python's `map` function"""
+    """In-place version of Python's `map` function."""
     for i, x in enumerate(lst):
         lst[i] = fun(x)
 
 
 def process_dependencies_in_place(d: dict, mapfunc):
-    """Given a parsed `pyproject.toml`, process dependencies according to `mapfunc`"""
+    """Given a parsed `pyproject.toml`, process dependencies according to `mapfunc`."""
     proj = d["project"]
 
     try:
@@ -115,7 +115,7 @@ app = typer.Typer()
 
 @app.command()
 def get_tox_minversion():
-    """Extract tox min_version (or minversion) from `tox.ini`"""
+    """Extract tox min_version (or minversion) from `tox.ini`."""
     config = configparser.ConfigParser()
     config.read("tox.ini")
     tox_section = config["tox"]
@@ -170,5 +170,5 @@ def _save_pyproject_toml(d: dict, inplace: bool) -> None:
 
 
 def main():
-    """Main entry point."""
+    """Run the app."""
     return app()  # pragma: no cover
