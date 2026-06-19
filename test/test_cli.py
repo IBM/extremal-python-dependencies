@@ -132,6 +132,14 @@ class TestGetToxMinversion:
         assert result.exit_code == 0
         assert result.stdout.strip() == "3.25"
 
+    def test_prints_min_version(self, project_dir):
+        (project_dir / "tox.ini").write_text(
+            "[tox]\nmin_version = 4.0\n", encoding="utf-8"
+        )
+        result = _runner.invoke(app, ["get-tox-minversion"])
+        assert result.exit_code == 0
+        assert result.stdout.strip() == "4.0"
+
     def test_entrypoint(self, project_dir):
         """Smoke test: the installed entry point responds to --help."""
         result = _runner.invoke(app, ["--help"])
