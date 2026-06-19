@@ -115,10 +115,15 @@ app = typer.Typer()
 
 @app.command()
 def get_tox_minversion():
-    """Extract tox minversion from `tox.ini`"""
+    """Extract tox min_version (or minversion) from `tox.ini`"""
     config = configparser.ConfigParser()
     config.read("tox.ini")
-    print(config["tox"]["minversion"])
+    tox_section = config["tox"]
+    # tox supports both spellings; prefer min_version (the newer spelling)
+    if "min_version" in tox_section:
+        print(tox_section["min_version"])
+    else:
+        print(tox_section["minversion"])
 
 
 def _pin_dependencies(mapfunc, inplace: bool):
