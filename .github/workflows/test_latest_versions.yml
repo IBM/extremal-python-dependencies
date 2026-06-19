@@ -24,11 +24,11 @@ jobs:
           - os: ubuntu-latest
             python-version: "3.10"
           - os: ubuntu-latest
-            python-version: "3.13"
+            python-version: "3.14"
           - os: macos-latest
-            python-version: "3.13"
+            python-version: "3.14"
           - os: windows-latest
-            python-version: "3.13"
+            python-version: "3.14"
     steps:
       - uses: actions/checkout@v6
       - name: Set up Python ${{ matrix.python-version }}
