@@ -1,0 +1,5 @@
+---
+features:
+  - |
+    Python 3.14 is now officially supported and tested in continuous
+    integration.
