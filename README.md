@@ -46,5 +46,5 @@ Each of the above patterns can be used in a CI script.
 
 ## Similar tools
 
-- [requirements-builder](https://requirements-builder.readthedocs.io/) (builds requirements from a `setup.py` file instead of a `pyproject.toml` file)
+- [requirements-builder](https://requirements-builder.readthedocs.io/): builds requirements from a `setup.py` file instead of a `pyproject.toml` file
 - [uv](https://docs.astral.sh/uv/)'s [`--resolution` strategies](https://docs.astral.sh/uv/concepts/resolution/#resolution-strategy): `lowest-direct` installs the lowest compatible versions of direct dependencies (similar to the `pin-dependencies` pattern above), while `lowest` extends this to transitive dependencies as well — addressing a [caveat](#caveats) of this tool. If `extremal-python-dependencies` does not meet your needs, `uv` may.
