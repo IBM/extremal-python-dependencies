@@ -4,12 +4,12 @@ build-backend = "hatchling.build"
 
 [project]
 name = "extremal-python-dependencies"
-version = "0.2.1"
+version = "1.0.0"
 description = "A utility for installing extremal versions of dependencies for more robust testing"
 readme = "README.md"
 license = {file = "LICENSE.txt"}
 classifiers = [
-    "Development Status :: 4 - Beta",
+    "Development Status :: 5 - Production/Stable",
     "Intended Audience :: Developers",
     "License :: OSI Approved :: Apache Software License",
     "Natural Language :: English",
