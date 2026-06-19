@@ -9,9 +9,109 @@
 
 """Tests of the commandline interface."""
 
-import os
+import tomlkit
+
+from extremal_python_dependencies.main import app
+from typer.testing import CliRunner
+
+_runner = CliRunner()
 
 
-def test_entrypoint():
-    exit_status = os.system("extremal-python-dependencies --help")
-    assert exit_status == 0
+class TestPinDependenciesToMinimum:
+    def test_stdout_contains_pinned_versions(self, project_dir):
+        result = _runner.invoke(app, ["pin-dependencies-to-minimum"])
+        assert result.exit_code == 0
+        assert "foo==1.2" in result.stdout
+        assert "bar==2.0" in result.stdout
+
+    def test_stdout_contains_allow_direct_references(self, project_dir):
+        result = _runner.invoke(app, ["pin-dependencies-to-minimum"])
+        assert "allow-direct-references" in result.stdout
+
+    def test_inplace_writes_file(self, project_dir):
+        result = _runner.invoke(app, ["pin-dependencies-to-minimum", "--inplace"])
+        assert result.exit_code == 0
+        assert result.stdout == ""
+        with open(project_dir / "pyproject.toml", encoding="utf-8") as f:
+            d = tomlkit.load(f)
+        assert "foo==1.2" in d["project"]["dependencies"]
+        assert "bar==2.0" in d["project"]["dependencies"]
+
+    def test_optional_deps_pinned(self, project_dir):
+        result = _runner.invoke(app, ["pin-dependencies-to-minimum"])
+        assert "pytest==7.0" in result.stdout
+
+    def test_build_system_pinned(self, project_dir):
+        result = _runner.invoke(app, ["pin-dependencies-to-minimum"])
+        assert "hatchling==1.0" in result.stdout
+
+    def test_dependency_group_pinned(self, project_dir):
+        result = _runner.invoke(app, ["pin-dependencies-to-minimum"])
+        assert "ruff==0.1" in result.stdout
+
+    def test_include_group_preserved(self, project_dir):
+        result = _runner.invoke(app, ["pin-dependencies-to-minimum"])
+        assert 'include-group = "test"' in result.stdout
+
+
+class TestPinDependencies:
+    def test_named_dep_replaced(self, project_dir):
+        result = _runner.invoke(
+            app,
+            ["pin-dependencies", "foo@ git+https://example.com/foo.git"],
+        )
+        assert result.exit_code == 0
+        assert "foo@ git+https://example.com/foo.git" in result.stdout
+
+    def test_unspecified_dep_unchanged(self, project_dir):
+        result = _runner.invoke(
+            app,
+            ["pin-dependencies", "foo@ git+https://example.com/foo.git"],
+        )
+        assert "bar~=2.0" in result.stdout
+
+    def test_allow_direct_references_added(self, project_dir):
+        result = _runner.invoke(
+            app,
+            ["pin-dependencies", "foo@ git+https://example.com/foo.git"],
+        )
+        assert "allow-direct-references" in result.stdout
+
+    def test_inplace_writes_file(self, project_dir):
+        result = _runner.invoke(
+            app,
+            [
+                "pin-dependencies",
+                "foo@ git+https://example.com/foo.git",
+                "--inplace",
+            ],
+        )
+        assert result.exit_code == 0
+        assert result.stdout == ""
+        with open(project_dir / "pyproject.toml", encoding="utf-8") as f:
+            d = tomlkit.load(f)
+        assert "foo@ git+https://example.com/foo.git" in d["project"]["dependencies"]
+
+
+class TestAddDependency:
+    def test_appends_to_stdout(self, project_dir):
+        result = _runner.invoke(app, ["add-dependency", "newpkg==1.0"])
+        assert result.exit_code == 0
+        assert "newpkg==1.0" in result.stdout
+
+    def test_inplace_writes_file(self, project_dir):
+        result = _runner.invoke(app, ["add-dependency", "newpkg==1.0", "--inplace"])
+        assert result.exit_code == 0
+        with open(project_dir / "pyproject.toml", encoding="utf-8") as f:
+            d = tomlkit.load(f)
+        assert "newpkg==1.0" in d["project"]["dependencies"]
+
+
+class TestGetToxMinversion:
+    def test_prints_minversion(self, project_dir):
+        (project_dir / "tox.ini").write_text(
+            "[tox]\nminversion = 3.25\n", encoding="utf-8"
+        )
+        result = _runner.invoke(app, ["get-tox-minversion"])
+        assert result.exit_code == 0
+        assert result.stdout.strip() == "3.25"

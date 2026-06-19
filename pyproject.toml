@@ -55,6 +55,9 @@ only-include = [
     "extremal_python_dependencies",
 ]
 
+[tool.pytest.ini_options]
+testpaths = ["test"]
+
 [tool.pylint.main]
 py-version = "3.10"
 disable = [
