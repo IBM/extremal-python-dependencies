@@ -166,4 +166,4 @@ def _save_pyproject_toml(d: dict, inplace: bool) -> None:
 
 def main():
     """Main entry point."""
-    return app()
+    return app()  # pragma: no cover
