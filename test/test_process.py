@@ -10,9 +10,11 @@
 """Tests for process_dependencies_in_place."""
 
 import tomlkit
-import pytest
 
-from extremal_python_dependencies.main import mapfunc_minimum, process_dependencies_in_place
+from extremal_python_dependencies.main import (
+    mapfunc_minimum,
+    process_dependencies_in_place,
+)
 
 
 def _parse(toml_text):
@@ -21,9 +23,7 @@ def _parse(toml_text):
 
 class TestProcessDependenciesInPlace:
     def test_project_dependencies(self):
-        d = _parse(
-            "[project]\ndependencies = ['foo>=1.0', 'bar~=2.0']\n"
-        )
+        d = _parse("[project]\ndependencies = ['foo>=1.0', 'bar~=2.0']\n")
         process_dependencies_in_place(d, mapfunc_minimum)
         assert list(d["project"]["dependencies"]) == ["foo==1.0", "bar==2.0"]
 
@@ -37,8 +37,7 @@ class TestProcessDependenciesInPlace:
 
     def test_dependency_groups(self):
         d = _parse(
-            "[project]\ndependencies = []\n"
-            '[dependency-groups]\ndev = ["ruff>=0.1"]\n'
+            '[project]\ndependencies = []\n[dependency-groups]\ndev = ["ruff>=0.1"]\n'
         )
         process_dependencies_in_place(d, mapfunc_minimum)
         assert list(d["dependency-groups"]["dev"]) == ["ruff==0.1"]

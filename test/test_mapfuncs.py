@@ -11,7 +11,11 @@
 
 import pytest
 
-from extremal_python_dependencies.main import inplace_map, mapfunc_minimum, mapfunc_replace
+from extremal_python_dependencies.main import (
+    inplace_map,
+    mapfunc_minimum,
+    mapfunc_replace,
+)
 
 
 class TestMapfuncMinimum:
