@@ -10,6 +10,9 @@ on:
       - main
       - 'stable/**'
 
+permissions:
+  contents: read
+
 jobs:
   coverage:
     name: code coverage (${{ matrix.os }}, ${{ matrix.python-version }})
@@ -21,6 +24,8 @@ jobs:
         python-version: ["3.13"]
     steps:
       - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v6
         with:
