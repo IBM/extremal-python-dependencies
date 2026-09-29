@@ -17,7 +17,17 @@ Another way to use this tool is to install development versions of certain packa
 
 This utility works with dependencies specified in a `pyproject.toml` file.  It modifies `pyproject.toml`, either by sending the transformed version to stdout (the default) or by modifying in place (which may be useful in CI scripts).
 
+## Installation
+
+```sh
+pip install 'extremal-python-dependencies<2'
+```
+
+This project follows [semantic versioning](https://semver.org/), so constraining the install to the current major version picks up new features and bug fixes while shielding CI from breaking changes in a future 2.0 release.
+
 ## How to use
+
+Each of the snippets below assumes `extremal-python-dependencies` has been installed as [above](#installation).
 
 The following snippet modifies `pyproject.toml` in place to test with the minimum supported version of each direct dependency, under the minimum supported [tox](https://tox.wiki/) version (as specified by `minversion` in `tox.ini`).
 
