@@ -12,6 +12,9 @@ on:
   schedule:
     - cron: '0 1 * * 2'
 
+permissions:
+  contents: read
+
 jobs:
   tests:
     name: latest version tests (${{ matrix.os }}, ${{ matrix.python-version }})
@@ -31,6 +34,8 @@ jobs:
             python-version: "3.14"
     steps:
       - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v6
         with:

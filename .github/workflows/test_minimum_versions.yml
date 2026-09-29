@@ -10,6 +10,9 @@ on:
       - main
       - 'stable/**'
 
+permissions:
+  contents: read
+
 jobs:
   tests:
     name: minimum version tests (${{ matrix.os }}, ${{ matrix.python-version }})
@@ -22,6 +25,8 @@ jobs:
         python-version: ["3.10"]
     steps:
       - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v6
         with:
